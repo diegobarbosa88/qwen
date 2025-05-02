@@ -1,17 +1,25 @@
-// Relógio em tempo real
-function atualizarRelogio() {
-    const agora = new Date();
-    document.getElementById('relogio').innerText = `Relógio: ${agora.toLocaleTimeString()}`;
-}
-setInterval(atualizarRelogio, 1000);
+// Simulação de cronômetro
+let timer = document.querySelector('.timer');
+let interval;
 
-// Simulação de registro de ponto
-function registrar(tipo) {
-    const funcionarioId = 1; // Exemplo: ID do usuário logado
-    fetch('/api/registrar-ponto.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tipo, funcionario_id: funcionarioId })
-    }).then(response => response.json())
-      .then(data => alert(`Registro de ${tipo} salvo!`));
+function startTimer() {
+    let count = 0;
+    interval = setInterval(() => {
+        const hours = Math.floor(count / 3600);
+        const minutes = Math.floor((count % 3600) / 60);
+        const seconds = count % 60;
+        timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        count++;
+    }, 1000);
 }
+
+document.querySelector('button').addEventListener('click', () => {
+    if (!interval) {
+        startTimer();
+        document.querySelector('button').textContent = 'Detener';
+    } else {
+        clearInterval(interval);
+        interval = null;
+        document.querySelector('button').textContent = 'Iniciar Jornada';
+    }
+});
