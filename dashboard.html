@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Controle de Ponto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Bem-vindo, João Silva</h2>
+        <div id="relogio"></div>
+        
+        <div class="buttons">
+            <button onclick="registrar('entrada')">Entrada</button>
+            <button onclick="registrar('pausa')">Pausa</button>
+            <button onclick="registrar('retorno')">Retorno</button>
+            <button onclick="registrar('saida')">Saída</button>
+        </div>
+
+        <div class="relatorio">
+            <h3>Horas Trabalhadas Hoje</h3>
+            <p id="horas">00:00</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
