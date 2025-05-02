@@ -1,44 +1,118 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
     margin: 0;
     padding: 0;
+    background: #f4f7fa;
 }
 
-.login-container, .dashboard {
-    max-width: 400px;
-    margin: 50px auto;
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.avatar {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.sidebar nav a:hover {
+    background: #e0f2ff;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cronometro, .mi-horario {
+    flex: 1;
     padding: 20px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-#relogio {
-    font-size: 1.5em;
-    margin: 20px 0;
+.timer {
+    font-size: 2em;
     text-align: center;
+    margin: 10px 0;
 }
 
-.buttons {
+.mi-horario .schedule {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.buttons button:nth-child(1) { background: #28a745; color: white; } /* Entrada */
-.buttons button:nth-child(2) { background: #ffc107; color: black; } /* Pausa */
-.buttons button:nth-child(3) { background: #17a2b8; color: white; } /* Retorno */
-.buttons button:nth-child(4) { background: #dc3545; color: white; } /* Saída */
+.day {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.section {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.calendar .month {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.days .day {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.days .day.active {
+    background: #007bff;
+    color: white;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    margin-top: 50px;
+}
+
+.notification {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
