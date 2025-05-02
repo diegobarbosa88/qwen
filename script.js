@@ -18,3 +18,25 @@ async function registrar(tipo) {
     });
     carregarRegistros();
 }
+
+async function carregarCalendario() {
+    const response = await fetch(`/api/get-calendario.php?funcionario_id=<?php echo $funcionario_id; ?>`);
+    const registros = await response.json();
+    
+    const container = document.getElementById('calendario-dias');
+    for (let i = 1; i <= 31; i++) {
+        const dia = i;
+        const registro = registros.find(r => r.dia === i);
+        const div = document.createElement('div');
+        div.className = 'day';
+        
+        if (registro) {
+            div.classList.add('active');
+            div.innerHTML = `${i}<br><small>${registro.horas}h</small>`;
+        } else {
+            div.innerText = i;
+        }
+        
+        container.appendChild(div);
+    }
+}
