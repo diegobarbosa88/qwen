@@ -19,6 +19,12 @@ async function registrar(tipo) {
     carregarRegistros();
 }
 
+async function atualizarHorasTrabalhadas() {
+    const response = await fetch(`/api/get-horas.php?funcionario_id=<?php echo $funcionario_id; ?>`);
+    const { total } = await response.json();
+    document.getElementById('horas-trabalhadas').innerText = total || '00:00';
+}
+
 async function carregarCalendario() {
     const response = await fetch(`/api/get-calendario.php?funcionario_id=<?php echo $funcionario_id; ?>`);
     const registros = await response.json();
