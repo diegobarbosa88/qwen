@@ -1,0 +1,12 @@
+<?php
+session_start();
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: dashboard.php");
+    exit();
+}
+?>
+<h2>Painel Administrativo</h2>
+<table>
+    <tr><th>Funcionário</th><th>Horas Trabalhadas</th><th>Ação</th></tr>
+    <!-- Lista de funcionários -->
+</table>
