@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container, .dashboard {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#relogio {
+    font-size: 1.5em;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.buttons button:nth-child(1) { background: #28a745; color: white; } /* Entrada */
+.buttons button:nth-child(2) { background: #ffc107; color: black; } /* Pausa */
+.buttons button:nth-child(3) { background: #17a2b8; color: white; } /* Retorno */
+.buttons button:nth-child(4) { background: #dc3545; color: white; } /* Saída */
