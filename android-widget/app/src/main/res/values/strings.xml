@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Glance Widget</string>
+    <string name="widget_label">Widget Simples</string>
+    <string name="widget_default_title">Olá, Glance!</string>
+    <string name="widget_refresh_action">Atualizar</string>
+</resources>
