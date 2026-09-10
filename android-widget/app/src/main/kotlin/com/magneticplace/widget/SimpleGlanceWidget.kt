@@ -18,7 +18,6 @@ import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.provideContent
-import androidx.glance.appwidget.state.PreferencesGlanceStateDefinition
 import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.background
 import androidx.glance.color.ColorProvider
@@ -30,6 +29,7 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.state.GlanceStateDefinition
+import androidx.glance.state.PreferencesGlanceStateDefinition
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
@@ -125,11 +125,9 @@ class IncrementCounterAction : ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters,
     ) {
-        updateAppWidgetState(context, PreferencesGlanceStateDefinition, glanceId) { prefs ->
-            prefs.toMutablePreferences().apply {
-                val current = this[WidgetStateKeys.COUNTER] ?: 0
-                this[WidgetStateKeys.COUNTER] = current + 1
-            }
+        updateAppWidgetState(context, glanceId) { prefs ->
+            val current = prefs[WidgetStateKeys.COUNTER] ?: 0
+            prefs[WidgetStateKeys.COUNTER] = current + 1
         }
         SimpleGlanceWidget().update(context, glanceId)
     }
