@@ -3,7 +3,6 @@ package com.magneticplace.widget
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
@@ -16,10 +15,10 @@ import androidx.glance.action.ActionParameters
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
-import androidx.glance.appwidget.PreferencesGlanceStateDefinition
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.provideContent
+import androidx.glance.appwidget.state.PreferencesGlanceStateDefinition
 import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.background
 import androidx.glance.color.ColorProvider
@@ -31,6 +30,7 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.state.GlanceStateDefinition
+import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 
@@ -43,6 +43,9 @@ private object WidgetStateKeys {
 private val WidgetBackgroundColor = Color(0xFF121212)
 private val WidgetTextColor = Color(0xFFFFFFFF)
 private val WidgetAccentColor = Color(0xFF64FFDA)
+
+/** This widget always renders dark, so day and night use the same color. */
+private fun solidColor(color: Color): ColorProvider = ColorProvider(day = color, night = color)
 
 /**
  * A minimal Glance app widget: dark background, a custom title, a counter that
@@ -77,7 +80,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = title,
                 style = TextStyle(
-                    color = ColorProvider(WidgetTextColor),
+                    color = solidColor(WidgetTextColor),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                 ),
@@ -88,7 +91,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = "Cliques: $counter",
                 style = TextStyle(
-                    color = ColorProvider(WidgetAccentColor),
+                    color = solidColor(WidgetAccentColor),
                     fontSize = 14.sp,
                 ),
             )
@@ -98,7 +101,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = context.getString(R.string.widget_refresh_action),
                 style = TextStyle(
-                    color = ColorProvider(WidgetBackgroundColor),
+                    color = solidColor(WidgetBackgroundColor),
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
                 ),
