@@ -1,0 +1,38 @@
+name: Android Widget Build
+
+on:
+  push:
+    branches:
+      - claude/android-widget-compose-glance-ybl719
+    paths:
+      - "android-widget/**"
+      - ".github/workflows/android-widget-build.yml"
+  pull_request:
+    paths:
+      - "android-widget/**"
+      - ".github/workflows/android-widget-build.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android-widget
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build widget module
+        run: ./gradlew assembleDebug --stacktrace
