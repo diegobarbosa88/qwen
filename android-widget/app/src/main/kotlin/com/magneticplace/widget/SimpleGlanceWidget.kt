@@ -27,7 +27,6 @@ import androidx.glance.layout.Column
 import androidx.glance.layout.ContentScale
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
-import androidx.glance.layout.defaultWeight
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
@@ -84,7 +83,10 @@ class SimpleGlanceWidget : GlanceAppWidget() {
                     contentScale = ContentScale.FillBounds,
                     modifier = GlanceModifier.fillMaxSize(),
                 )
-                Column(modifier = GlanceModifier.fillMaxSize().padding(16.dp)) {
+                Box(
+                    modifier = GlanceModifier.fillMaxSize().padding(16.dp),
+                    contentAlignment = Alignment.TopStart,
+                ) {
                     Row(verticalAlignment = Alignment.Vertical.CenterVertically) {
                         Text(text = "📍", style = TextStyle(fontSize = 14.sp))
                         Spacer(modifier = GlanceModifier.width(6.dp))
@@ -97,13 +99,17 @@ class SimpleGlanceWidget : GlanceAppWidget() {
                             ),
                         )
                     }
-                    Spacer(modifier = GlanceModifier.defaultWeight())
-                    Row(modifier = GlanceModifier.fillMaxWidth()) {
-                        Column(modifier = GlanceModifier.defaultWeight()) {
+                }
+                Box(
+                    modifier = GlanceModifier.fillMaxSize().padding(16.dp),
+                    contentAlignment = Alignment.BottomStart,
+                ) {
+                    Row {
+                        Column(modifier = GlanceModifier.width(140.dp)) {
                             SunMoonRow(icon = "☀ ↑", time = "07:42")
                             SunMoonRow(icon = "☀ ↓", time = "20:27")
                         }
-                        Column(modifier = GlanceModifier.defaultWeight()) {
+                        Column(modifier = GlanceModifier.width(140.dp)) {
                             SunMoonRow(icon = "☾ ↑", time = "06:45")
                             SunMoonRow(icon = "☾ ↓", time = "20:04")
                         }
@@ -125,70 +131,80 @@ class SimpleGlanceWidget : GlanceAppWidget() {
 
             Spacer(modifier = GlanceModifier.height(18.dp))
 
-            Row(modifier = GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.Vertical.Bottom) {
-                Text(
-                    text = timeText,
-                    style = TextStyle(
-                        color = ColorProvider(TextWhite),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 52.sp,
-                    ),
-                )
-                Spacer(modifier = GlanceModifier.defaultWeight())
-                Column(horizontalAlignment = Alignment.Horizontal.End) {
-                    Row(verticalAlignment = Alignment.Vertical.CenterVertically) {
-                        Text(
-                            text = "↘",
-                            style = TextStyle(color = ColorProvider(TextWhite), fontSize = 16.sp),
-                        )
-                        Spacer(modifier = GlanceModifier.width(4.dp))
-                        Column(horizontalAlignment = Alignment.Horizontal.End) {
-                            Text(
-                                text = "0 km/h",
-                                style = TextStyle(color = ColorProvider(TextWhite), fontSize = 13.sp),
-                            )
-                            Text(
-                                text = "Oeste",
-                                style = TextStyle(color = ColorProvider(TextMuted), fontSize = 11.sp),
-                            )
-                        }
-                    }
+            Box(modifier = GlanceModifier.fillMaxWidth().height(70.dp)) {
+                Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.BottomStart) {
                     Text(
-                        text = "18°C",
+                        text = timeText,
                         style = TextStyle(
                             color = ColorProvider(TextWhite),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 30.sp,
+                            fontSize = 52.sp,
                         ),
                     )
+                }
+                Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
+                    Column(horizontalAlignment = Alignment.Horizontal.End) {
+                        Row(verticalAlignment = Alignment.Vertical.CenterVertically) {
+                            Text(
+                                text = "↘",
+                                style = TextStyle(color = ColorProvider(TextWhite), fontSize = 16.sp),
+                            )
+                            Spacer(modifier = GlanceModifier.width(4.dp))
+                            Column(horizontalAlignment = Alignment.Horizontal.End) {
+                                Text(
+                                    text = "0 km/h",
+                                    style = TextStyle(color = ColorProvider(TextWhite), fontSize = 13.sp),
+                                )
+                                Text(
+                                    text = "Oeste",
+                                    style = TextStyle(color = ColorProvider(TextMuted), fontSize = 11.sp),
+                                )
+                            }
+                        }
+                        Text(
+                            text = "18°C",
+                            style = TextStyle(
+                                color = ColorProvider(TextWhite),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 30.sp,
+                            ),
+                        )
+                    }
                 }
             }
 
             Spacer(modifier = GlanceModifier.height(4.dp))
 
-            Row(modifier = GlanceModifier.fillMaxWidth()) {
-                Spacer(modifier = GlanceModifier.defaultWeight())
+            Box(
+                modifier = GlanceModifier.fillMaxWidth().height(48.dp),
+                contentAlignment = Alignment.CenterEnd,
+            ) {
                 Text(text = "☁", style = TextStyle(color = ColorProvider(TextWhite), fontSize = 40.sp))
             }
 
             Spacer(modifier = GlanceModifier.height(14.dp))
 
-            Row(modifier = GlanceModifier.fillMaxWidth()) {
-                forecast.forEach { item ->
-                    Column(
-                        modifier = GlanceModifier.defaultWeight(),
-                        horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
-                    ) {
-                        Text(text = "☁", style = TextStyle(color = ColorProvider(TextWhite), fontSize = 18.sp))
-                        Spacer(modifier = GlanceModifier.height(4.dp))
-                        Text(
-                            text = "${item.minC}°C/${item.maxC}°C",
-                            style = TextStyle(
-                                color = ColorProvider(TextWhite),
-                                fontWeight = FontWeight.Medium,
-                                fontSize = 12.sp,
-                            ),
-                        )
+            Box(modifier = GlanceModifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
+                Row {
+                    forecast.forEachIndexed { index, item ->
+                        if (index > 0) {
+                            Spacer(modifier = GlanceModifier.width(10.dp))
+                        }
+                        Column(
+                            modifier = GlanceModifier.width(84.dp),
+                            horizontalAlignment = Alignment.Horizontal.CenterHorizontally,
+                        ) {
+                            Text(text = "☁", style = TextStyle(color = ColorProvider(TextWhite), fontSize = 18.sp))
+                            Spacer(modifier = GlanceModifier.height(4.dp))
+                            Text(
+                                text = "${item.minC}°C/${item.maxC}°C",
+                                style = TextStyle(
+                                    color = ColorProvider(TextWhite),
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 12.sp,
+                                ),
+                            )
+                        }
                     }
                 }
             }
