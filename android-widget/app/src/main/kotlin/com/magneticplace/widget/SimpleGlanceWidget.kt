@@ -44,9 +44,6 @@ private val WidgetBackgroundColor = Color(0xFF121212)
 private val WidgetTextColor = Color(0xFFFFFFFF)
 private val WidgetAccentColor = Color(0xFF64FFDA)
 
-/** This widget always renders dark, so day and night use the same color. */
-private fun solidColor(color: Color): ColorProvider = ColorProvider(day = color, night = color)
-
 /**
  * A minimal Glance app widget: dark background, a custom title, a counter that
  * demonstrates persisted/updatable state, and a button that mutates that state.
@@ -80,7 +77,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = title,
                 style = TextStyle(
-                    color = solidColor(WidgetTextColor),
+                    color = ColorProvider(WidgetTextColor),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                 ),
@@ -91,7 +88,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = "Cliques: $counter",
                 style = TextStyle(
-                    color = solidColor(WidgetAccentColor),
+                    color = ColorProvider(WidgetAccentColor),
                     fontSize = 14.sp,
                 ),
             )
@@ -101,7 +98,7 @@ class SimpleGlanceWidget : GlanceAppWidget() {
             Text(
                 text = context.getString(R.string.widget_refresh_action),
                 style = TextStyle(
-                    color = solidColor(WidgetBackgroundColor),
+                    color = ColorProvider(WidgetBackgroundColor),
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
                 ),
