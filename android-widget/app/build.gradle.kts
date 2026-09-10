@@ -39,7 +39,4 @@ dependencies {
     // Jetpack Compose Glance for App Widgets
     implementation("androidx.glance:glance-appwidget:1.1.1")
     implementation("androidx.glance:glance-material3:1.1.1")
-
-    // Persists widget state (e.g. counter/text) across process death and updates
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
 }
