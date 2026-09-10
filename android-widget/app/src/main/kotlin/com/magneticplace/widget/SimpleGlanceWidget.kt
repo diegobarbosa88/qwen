@@ -117,13 +117,13 @@ class SimpleGlanceWidget : GlanceAppWidget() {
                 }
             }
 
-            Spacer(modifier = GlanceModifier.height(10.dp))
+            Spacer(modifier = GlanceModifier.height(7.dp))
 
             Text(
                 text = "Viajam sol e lua",
                 style = TextStyle(
                     color = ColorProvider(TextWhite),
-                    fontSize = 13.sp,
+                    fontSize = 12.sp,
                     textAlign = TextAlign.Center,
                 ),
                 modifier = GlanceModifier.fillMaxWidth(),
@@ -131,18 +131,20 @@ class SimpleGlanceWidget : GlanceAppWidget() {
 
             Spacer(modifier = GlanceModifier.height(18.dp))
 
-            Box(modifier = GlanceModifier.fillMaxWidth().height(70.dp)) {
+            // Clock (bottom-start) and wind/temperature/cloud (top-end) share one
+            // panel so they read as a single group instead of two loose rows.
+            Box(modifier = GlanceModifier.fillMaxWidth().height(148.dp)) {
                 Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.BottomStart) {
                     Text(
                         text = timeText,
                         style = TextStyle(
                             color = ColorProvider(TextWhite),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 52.sp,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 54.sp,
                         ),
                     )
                 }
-                Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
+                Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.TopEnd) {
                     Column(horizontalAlignment = Alignment.Horizontal.End) {
                         Row(verticalAlignment = Alignment.Vertical.CenterVertically) {
                             Text(
@@ -166,20 +168,12 @@ class SimpleGlanceWidget : GlanceAppWidget() {
                             style = TextStyle(
                                 color = ColorProvider(TextWhite),
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 30.sp,
+                                fontSize = 28.sp,
                             ),
                         )
+                        Text(text = "☁", style = TextStyle(color = ColorProvider(TextWhite), fontSize = 48.sp))
                     }
                 }
-            }
-
-            Spacer(modifier = GlanceModifier.height(4.dp))
-
-            Box(
-                modifier = GlanceModifier.fillMaxWidth().height(48.dp),
-                contentAlignment = Alignment.CenterEnd,
-            ) {
-                Text(text = "☁", style = TextStyle(color = ColorProvider(TextWhite), fontSize = 40.sp))
             }
 
             Spacer(modifier = GlanceModifier.height(14.dp))
